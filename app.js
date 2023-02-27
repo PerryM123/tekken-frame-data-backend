@@ -15,8 +15,6 @@ const BOOLEAN = {
 app.get(`${apiPath}/characters`, (req, res) => {
   database.query("SELECT * from characters", (error, rows) => {
     if (!error) {
-      // console.log('rows[0].id: ', rows[0].id);
-      let returnObject = {}
       res.json(rows);
     } else {
       console.log(error);
