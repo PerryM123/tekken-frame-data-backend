@@ -1,25 +1,18 @@
 // library
 import express from 'express';
 // database
-import database from './database/index.js';
+import { getCharacterList, addCharacter, deleteCharacter, updateCharacterList } from './controller/characterList.js';
 const app = express()
 const port = 8000
+import bodyParser from 'body-parser';
+const jsonParcer = bodyParser.json();
+
 
 const apiPath = '/api/v1';
 
-const BOOLEAN = {
-  true: 1,
-  false: 0
-}
-
-app.get(`${apiPath}/characters`, (req, res) => {
-  database.query("SELECT * from characters", (error, rows) => {
-    if (!error) {
-      res.json(rows);
-    } else {
-      console.log(error);
-    }
-  })
-})
+app.get(`${apiPath}/characters`, getCharacterList)
+app.post(`${apiPath}/characters`, jsonParcer, addCharacter)
+app.delete(`${apiPath}/characters`, deleteCharacter)
+app.put(`${apiPath}/characters/:characterName`, updateCharacterList)
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
