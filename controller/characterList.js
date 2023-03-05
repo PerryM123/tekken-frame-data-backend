@@ -32,7 +32,7 @@ export const getSpecificCharacter = (req, res) => {
   }
   database.query("select * from characters where name=?;", [name], (error, rows) => {
     if (!error) {
-      if (rows.length == 0) {
+      if (!rows.length) {
         return res.status(404).json({
           message: "キャラクターは存在しない",
           code: "ERR_CHARACTER_DOES_NOT_EXIST"
