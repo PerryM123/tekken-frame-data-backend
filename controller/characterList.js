@@ -16,7 +16,6 @@ export const getCharacterList = (req, res) => {
       }));
     }
     return res.status(500).json({
-      // TODO: エラーコードを確定できたら差し替える
       message: "error",
       code: "ERR_GET_ERROR"
     });
@@ -27,7 +26,6 @@ export const getSpecificCharacter = (req, res) => {
   const name = req.params.name;
   if (!req.params || req.params.name === undefined) {
     return res.status(400).json({
-      // TODO: エラーコードを確定できたら差し替える
       message: "missing query (name)",
       code: "ERR_MISSING_GET_SPECIFIC_CHARACTER"
     });
@@ -46,7 +44,6 @@ export const getSpecificCharacter = (req, res) => {
       });
     }
     return res.status(500).json({
-      // TODO: エラーコードを確定できたら差し替える
       message: "error",
       code: "ERR_GET_SPECIFIC_CHARACTER_ERROR"
     });
@@ -57,14 +54,12 @@ export const addCharacter = (req, res) => {
   const body = req.body;
   if (body.name === undefined) {
     return res.status(400).json({
-      // TODO: エラーコードを確定できたら差し替える
       message: "missing body (name)",
       code: "ERR_MISSING_BODY_POST"
     });
   }
   if (body.is_completed === undefined) {
     return res.status(400).json({
-      // TODO: エラーコードを確定できたら差し替える
       message: "missing body (is_completed)",
       code: "ERR_MISSING_BODY_POST"
     });
@@ -86,7 +81,6 @@ export const deleteCharacter = (req, res) => {
   const body = req.body;
   if (body.name === undefined) {
     return res.status(400).json({
-      // TODO: エラーコードを確定できたら差し替える
       message: "missing body (name)",
       code: "ERR_MISSING_BODY_POST"
     });
@@ -109,14 +103,12 @@ export const updateCharacterName = (req, res) => {
   const name = req.params.name;
   if (body.name === undefined) {
     return res.status(400).json({
-      // TODO: エラーコードを確定できたら差し替える
       message: "missing body (name)",
       code: "ERR_MISSING_BODY_PUT"
     });
   }
   if (!req.params || req.params.name === undefined) {
     return res.status(400).json({
-      // TODO: エラーコードを確定できたら差し替える
       message: "missing params (name)",
       code: "ERR_MISSING_PARAMS_PUT"
     });
@@ -139,14 +131,12 @@ export const updateCharacterName = (req, res) => {
 //   const isCompleted = req.params.isCompleted === true ? BOOLEAN.true : BOOLEAN.false;
 //   if (body.name === undefined) {
 //     return res.status(400).json({
-//       // TODO: エラーコードを確定できたら差し替える
 //       message: "missing body (name)",
 //       code: "ERR_MISSING_BODY_PUT"
 //     });
 //   }
 //   if (!req.params || req.params.name === undefined) {
 //     return res.status(400).json({
-//       // TODO: エラーコードを確定できたら差し替える
 //       message: "missing params (name)",
 //       code: "ERR_MISSING_PARAMS_PUT"
 //     });
