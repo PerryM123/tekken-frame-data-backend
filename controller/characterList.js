@@ -65,41 +65,28 @@ export const addCharacter = (req, res) => {
     });
   }
   database.query("select * from characters where name=?;", [body.name], (selectError, selectRows) => {
-    console.log('selectError: ', selectError);
     if (selectError) {
       return res.status(500).json({
         message: `${selectError}`
       });
     }
-    console.log('selectRows.length: ', selectRows.length);
-    console.log('body.name: ', body.name);
-    console.log('body.is_completed: ', body.is_completed);
     if (!selectRows.length) {
-      console.log('we made it!!');
       database.query("INSERT INTO characters(name,is_completed) VALUES (?,?);", [body.name, body.is_completed], (error, insertRows) => {
-        console.log('error: ', error);
-        console.log('insertRows: ', insertRows);
         if (!error) {
-          console.log('return 200');
-          console.log('==============');
           return res.status(200).json({
             message: "POST success"
           });
         }
-        console.log('return 500');
-        console.log('==============');
         return res.status(500).json({
           message: `${error}`
         });
       })
-      console.log('oops!!!!');
+    } else {
+      return res.status(409).json({
+        message: "キャラクターはすでに登録されてる",
+        code: "ERR_ALREADY_ADDED"
+      });
     }
-    console.log('return 409 now');
-    console.log('==============');
-    return res.status(409).json({
-      message: "キャラクターはすでに登録されてる",
-      code: "ERR_ALREADY_ADDED"
-    });
   });
 }
 
@@ -108,7 +95,7 @@ export const deleteCharacter = (req, res) => {
   if (body.name === undefined) {
     return res.status(400).json({
       message: "missing body (name)",
-      code: "ERR_MISSING_BODY_POST"
+      code: "ERR_MISSING_BODY_DELETE"
     });
   }
   // TODO: すでにデータベースにあれば追加しない。409を返す
@@ -170,7 +157,6 @@ export const updateCharacterName = (req, res) => {
 //   // TODO: すでにデータベースにあれば追加しないように修正必須（409を返す）
 //   database.query("UPDATE characters SET name=? where name=?;", [isCompleted, body.name], (error, rows) => {
 //     if (!error) {
-//       console.log("PUT rows: ", rows);
 //       return res.status(200).json({
 //         message: "PUT success"
 //       });
