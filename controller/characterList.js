@@ -151,31 +151,3 @@ export const updateCharacterName = (req, res) => {
     });
   })
 }
-
-// export const updateCharacterStatus = (req, res) => {
-//   const body = req.body;
-//   const isCompleted = req.params.isCompleted === true ? BOOLEAN.true : BOOLEAN.false;
-//   if (body.name === undefined) {
-//     return res.status(400).json({
-//       message: "missing body (name)",
-//       code: "ERR_MISSING_BODY_PUT"
-//     });
-//   }
-//   if (!req.params || req.params.name === undefined) {
-//     return res.status(400).json({
-//       message: "missing params (name)",
-//       code: "ERR_MISSING_PARAMS_PUT"
-//     });
-//   }
-//   // TODO: すでにデータベースにあれば追加しないように修正必須（409を返す）
-//   database.query("UPDATE characters SET name=? where name=?;", [isCompleted, body.name], (error, rows) => {
-//     if (!error) {
-//       return res.status(200).json({
-//         message: "PUT success"
-//       });
-//     }
-//     return res.status(500).json({
-//       message: `${error}`
-//     });
-//   })
-// }
