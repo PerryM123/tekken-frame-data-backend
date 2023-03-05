@@ -98,17 +98,31 @@ export const deleteCharacter = (req, res) => {
       code: "ERR_MISSING_BODY_DELETE"
     });
   }
-  // TODO: すでにデータベースにあれば追加しない。409を返す
-  database.query("DELETE from characters where name=?;", [body.name], (error, rows) => {
-    if (!error) {
-      return res.status(200).json({
-        message: "DELETE success"
+  database.query("select * from characters where name=?;", [body.name], (selectError, selectRows) => {
+    console.log('selectRows: ', selectRows);
+    if (selectError) {
+      return res.status(500).json({
+        message: `${selectError}`
       });
     }
-    return res.status(500).json({
-      message: `${error}`
-    });
-  })
+    if (selectRows.length) {
+      database.query("DELETE from characters where name=?;", [body.name], (error, rows) => {
+        if (!error) {
+          return res.status(200).json({
+            message: "DELETE success"
+          });
+        }
+        return res.status(500).json({
+          message: `${error}`
+        });
+      })
+    } else {
+      return res.status(404).json({
+        message: "キャラクターは存在されてない",
+        code: "ERR_NOT_FOUND"
+      });
+    }
+  });
 }
 
 export const updateCharacterName = (req, res) => {
