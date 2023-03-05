@@ -1,6 +1,7 @@
 // library
 import express from 'express';
-// database
+import bodyParser from 'body-parser';
+// controllers
 import {
   getCharacterList,
   addCharacter,
@@ -9,20 +10,17 @@ import {
   // updateCharacterStatus,
   getSpecificCharacter
 } from './controller/characterList.js';
-const app = express()
-const port = 8000
-import bodyParser from 'body-parser';
-const jsonParcer = bodyParser.json();
 
-
+const app = express();
+app.use(bodyParser.json());
+const port = 8000;
 const apiPath = '/api/v1';
 
-// TODO: jsonParcerをつけなくていい方法あるかな
 app.get(`${apiPath}/characters`, getCharacterList);
 app.get(`${apiPath}/characters/:name`, getSpecificCharacter);
-app.post(`${apiPath}/characters`, jsonParcer, addCharacter);
-app.delete(`${apiPath}/characters`, jsonParcer, deleteCharacter);
-app.put(`${apiPath}/characters/:name`, jsonParcer, updateCharacterName);
+app.post(`${apiPath}/characters`, addCharacter);
+app.delete(`${apiPath}/characters`, deleteCharacter);
+app.put(`${apiPath}/characters/:name`, updateCharacterName);
 // TODO: そもそもできるか検討必須
 // app.put(`${apiPath}/characters/:isComplete`, jsonParcer, updateCharacterStatus);
 
