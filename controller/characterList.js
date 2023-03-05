@@ -140,7 +140,6 @@ export const updateCharacterName = (req, res) => {
       code: "ERR_MISSING_PARAMS_PUT"
     });
   }
-  // TODO: すでにデータベースにあれば追加しないように修正必須（409を返す）
   database.query("UPDATE characters SET name=? where name=?;", [body.name, name], (error, rows) => {
     if (!error) {
       return res.status(200).json({
