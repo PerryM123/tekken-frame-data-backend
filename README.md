@@ -19,7 +19,41 @@ $ yarn
 $ yarn dev
 ```
 
-※ TODO: Docker ができたらもうすぐ Docker 手順も追記必須
+# Dockerについて
+※ 事前準備:
+- 1) Docker Desktopを導入してください（[Mac導入方法](https://qiita.com/gahoh/items/92217e0a887bb81e3155)・[Windows導入方法](https://qiita.com/gahoh/items/7b21377b5c9e3ffddf4a)
+- 2) 導入後、Docker Desktopを開いてください
+
+## アプリ起動
+```
+# コンテナ起動
+$ cd ~/workspace/tekken-frame-data-backend
+$ docker-compose up -d
+# コンテナ確認
+$ docker container ls
+# ログを確認
+$ docker logs -f tekken-frame-data-backend_app_1
+```
+上記で起動できたらブラウザまたはPostmanなどで `http://0.0.0.0:8000/api/v1/characters` をアクセスできます。
+
+## MySQLデータベース初期化
+※ 事前準備: コンテナ起動
+```
+# コンテナに接続
+$ docker exec -it tekken-frame-data-backend_mysqldb_1 bash
+# mysqlにログインし、パスワードへログイン（パスワードは.envを参考してください）
+@ bash-4.2
+$ mysql -u root -p mysql
+# schema.sqlを反映する
+mysql> create database tekken_frame_data;
+    ->     use tekken_frame_data;
+    ->     CREATE TABLE characters (
+    ->     id INTEGER NOT NULL AUTO_INCREMENT,
+    ->     name varchar(255),
+    ->     is_completed boolean,
+    ->     PRIMARY KEY (id)
+    -> );
+```
 
 ## Techonogies being used
 
@@ -30,6 +64,4 @@ $ yarn dev
 
 ## TODO
 
-- [ ] docker イメージとコンテナの準備
-  - 自分の Macbook Air 内の mysql でちゃんと動いてるけど自分の Macbook Pro 内の MYSQL では不具合ばっかりなので docker を使うことになりました
 - [ ] Open API に紐づくこと
