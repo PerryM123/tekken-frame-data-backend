@@ -17,6 +17,7 @@ export const getCharacterList = (req, res) => {
     }
     return res.status(500).json({
       message: "error",
+      // TODO: 分かりやすいエラーコードに変更
       code: "ERR_GET_ERROR"
     });
   })
@@ -64,13 +65,14 @@ export const addCharacter = (req, res) => {
       code: "ERR_MISSING_BODY_POST"
     });
   }
-  database.query("select * from characters where name=?;", [body.name], (selectError, selectRows) => {
-    if (selectError) {
+  database.query("select * from characters where name=?;", [body.name], (error, rows) => {
+    if (error) {
       return res.status(500).json({
-        message: `${selectError}`
+        // TODO: loggerにerror内容を出力し、以下のメッセージに別のエラーコードに変更
+        message: `${error}`
       });
     }
-    if (!selectRows.length) {
+    if (!rows.length) {
       database.query("INSERT INTO characters(name,is_completed) VALUES (?,?);", [body.name, body.is_completed], (error, insertRows) => {
         if (!error) {
           return res.status(200).json({
@@ -78,6 +80,7 @@ export const addCharacter = (req, res) => {
           });
         }
         return res.status(500).json({
+          // TODO: loggerにerror内容を出力し、以下のメッセージに別のエラーコードに変更
           message: `${error}`
         });
       })
@@ -98,14 +101,14 @@ export const deleteCharacter = (req, res) => {
       code: "ERR_MISSING_BODY_DELETE"
     });
   }
-  database.query("select * from characters where name=?;", [body.name], (selectError, selectRows) => {
-    console.log('selectRows: ', selectRows);
-    if (selectError) {
+  database.query("select * from characters where name=?;", [body.name], (error, rows) => {
+    if (error) {
       return res.status(500).json({
-        message: `${selectError}`
+        // TODO: loggerにerror内容を出力し、以下のメッセージに別のエラーコードに変更
+        message: `${error}`
       });
     }
-    if (selectRows.length) {
+    if (rows.length) {
       database.query("DELETE from characters where name=?;", [body.name], (error, rows) => {
         if (!error) {
           return res.status(200).json({
@@ -113,6 +116,7 @@ export const deleteCharacter = (req, res) => {
           });
         }
         return res.status(500).json({
+          // TODO: loggerにerror内容を出力し、以下のメッセージに別のエラーコードに変更
           message: `${error}`
         });
       })
@@ -147,6 +151,7 @@ export const updateCharacterName = (req, res) => {
       });
     }
     return res.status(500).json({
+      // TODO: loggerにerror内容を出力し、以下のメッセージに別のエラーコードに変更
       message: `${error}`
     });
   })
