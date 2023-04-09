@@ -21,8 +21,9 @@ $ yarn dev
 
 # Dockerについて
 ※ 事前準備:
-- 1) Docker Desktopを導入してください（[Mac導入方法](https://qiita.com/gahoh/items/92217e0a887bb81e3155)・[Windows導入方法](https://qiita.com/gahoh/items/7b21377b5c9e3ffddf4a)
-- 2) 導入後、Docker Desktopを開いてください
+
+- 1. Docker Desktop を導入してください（[Mac 導入方法](https://qiita.com/gahoh/items/92217e0a887bb81e3155)・[Windows 導入方法](https://qiita.com/gahoh/items/7b21377b5c9e3ffddf4a)
+- 2. 導入後、Docker Desktop を開いてください
 
 ## アプリ起動
 ```
@@ -31,10 +32,9 @@ $ cd ~/workspace/tekken-frame-data-backend
 $ docker-compose up -d
 # コンテナ確認
 $ docker container ls
-# ログを確認
-$ docker logs -f tekken-frame-data-backend_app_1
+# node起動
+$ yarn dev
 ```
-上記で起動できたらブラウザまたはPostmanなどで `http://0.0.0.0:8000/api/v1/characters` をアクセスできます。
 
 ## MySQLデータベース初期化
 ※ 事前準備: コンテナ起動
