@@ -22,8 +22,8 @@ $ yarn dev
 # Dockerについて
 ※ 事前準備:
 
-- 1. Docker Desktop を導入してください（[Mac 導入方法](https://qiita.com/gahoh/items/92217e0a887bb81e3155)・[Windows 導入方法](https://qiita.com/gahoh/items/7b21377b5c9e3ffddf4a)
-- 2. 導入後、Docker Desktop を開いてください
+1. Docker Desktop を導入してください（[Mac 導入方法](https://qiita.com/gahoh/items/92217e0a887bb81e3155)・[Windows 導入方法](https://qiita.com/gahoh/items/7b21377b5c9e3ffddf4a)
+2. 導入後、Docker Desktop を開いてください
 
 ## アプリ起動
 ```

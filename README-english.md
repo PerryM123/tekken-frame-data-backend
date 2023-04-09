@@ -23,8 +23,8 @@ $ yarn dev
 # About Docker
 ※ Required:
 
-- 1. Download Docker Desktop（[Mac 導入方法](https://qiita.com/gahoh/items/92217e0a887bb81e3155)・[Windows 導入方法](https://qiita.com/gahoh/items/7b21377b5c9e3ffddf4a)
-- 2. After installation, open Docker Desktop
+1. Download Docker Desktop（[Mac 導入方法](https://qiita.com/gahoh/items/92217e0a887bb81e3155)・[Windows 導入方法](https://qiita.com/gahoh/items/7b21377b5c9e3ffddf4a)
+2. After installation, open Docker Desktop
 
 ## Starting Application
 ```
