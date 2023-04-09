@@ -6,26 +6,20 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export const logger = (req, res, next) => {
-  console.log('reqestMessage');
-  const messageType = 'error';
-  const timeStamp = dayjs().tz("Asia/Tokyo").format();;
+  const timeStamp = dayjs().tz("Asia/Tokyo").format();
+  const startTime = process.hrtime();
 
-  console.log(`${req.method} ${req.originalUrl} [STARTED]`)
-  const start = process.hrtime()
-
-  const getDurationInMilliseconds = (start) => {
-    const NS_PER_SEC = 1e9
-    const NS_TO_MS = 1e6
-    const diff = process.hrtime(start)
-
-    return (diff[0] * NS_PER_SEC + diff[1]) / NS_TO_MS
+  const getDurationInMilliseconds = (startTime) => {
+    const NS_PER_SEC = 1e9;
+    const NS_TO_MS = 1e6;
+    const timeDifference = process.hrtime(startTime);
+    return (timeDifference[0] * NS_PER_SEC + timeDifference[1]) / NS_TO_MS;
   }
 
   res.on('finish', () => {
-    const durationInMilliseconds = getDurationInMilliseconds(start)
-    // console.log(`${req.method} ${req.originalUrl} [FINISHED]  ms`)
+    const durationInMilliseconds = getDurationInMilliseconds(startTime);
     console.log(`[${timeStamp}] ${req.method} ${req.originalUrl} ${res.statusCode} - - ${req.ip} - ${durationInMilliseconds.toLocaleString()} ms`)
-  })
+  });
 
   next();
 }
