@@ -9,9 +9,12 @@ import {
   updateCharacterName,
   getSpecificCharacter
 } from './controller/characterList.js';
+// middleware
+import { logger } from './middleware/logger.js';
 
 const app = express();
 app.use(bodyParser.json());
+app.use(logger);
 const port = 8000;
 const apiPath = '/api/v1';
 // routes
