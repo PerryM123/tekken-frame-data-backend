@@ -1,0 +1,5 @@
+{
+  // TODO: vscodeに依存してしまうから他の方法がないか確認
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": false
+}
