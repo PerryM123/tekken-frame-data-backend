@@ -20,7 +20,41 @@ $ yarn
 $ yarn dev
 ```
 
-※ TODO: After preparing docker, be sure to add on to the Getting Started section
+# About Docker
+※ Required:
+
+1. Download Docker Desktop（[Mac 導入方法](https://qiita.com/gahoh/items/92217e0a887bb81e3155)・[Windows 導入方法](https://qiita.com/gahoh/items/7b21377b5c9e3ffddf4a)
+2. After installation, open Docker Desktop
+
+## Starting Application
+```
+# Start container
+$ cd ~/workspace/tekken-frame-data-backend
+$ docker-compose up -d
+# Check container
+$ docker container ls
+# Start node
+$ yarn dev
+```
+
+## Setting Up MySQL Database
+※ Required: Container is running
+```
+# Connect to database container
+$ docker exec -it tekken-frame-data-backend_mysqldb_1 bash
+# log into mysql and input password（Refer to the password in .env file）
+@ bash-4.2
+$ mysql -u root -p mysql
+# Add schema.sql
+mysql> create database tekken_frame_data;
+    ->     use tekken_frame_data;
+    ->     CREATE TABLE characters (
+    ->     id INTEGER NOT NULL AUTO_INCREMENT,
+    ->     name varchar(255),
+    ->     is_completed boolean,
+    ->     PRIMARY KEY (id)
+    -> );
+```
 
 ## Techonogies being used
 
@@ -31,6 +65,4 @@ $ yarn dev
 
 ## TODO
 
-- [ ] Preparing docker image and container
-  - I'm having issues where the local mysql server works on my Macbook Air but not my Macbook Pro's local mysql server
 - [ ] Integrate Open API
