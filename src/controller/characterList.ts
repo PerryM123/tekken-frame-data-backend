@@ -1,4 +1,4 @@
-import database from './../database/index.js';
+import database from '../database/index';
 
 const BOOLEAN = {
   true: 1,
@@ -17,7 +17,8 @@ const serverLogger = (type, message) => {
 }
 
 export const getCharacterList = (req, res) => {
-  database.query("SELECT * from characters", (error, rows) => {
+  // TODO: 以下のanyをなくす
+  database.query("SELECT * from characters", (error, rows: any) => {
     if (!error) {
       return res.status(200).json(rows.map(item => {
         return {
@@ -43,7 +44,8 @@ export const getSpecificCharacter = (req, res) => {
       code: "ERR_MISSING_GET_SPECIFIC_CHARACTER"
     });
   }
-  database.query("select * from characters where name=?;", [name], (error, rows) => {
+  // TODO: 以下のanyをなくす
+  database.query("select * from characters where name=?;", [name], (error, rows: any) => {
     if (!error) {
       if (!rows.length) {
         return res.status(404).json({
@@ -80,7 +82,8 @@ export const addCharacter = (req, res) => {
       code: "ERR_MISSING_BODY_POST"
     });
   }
-  database.query("select * from characters where name=?;", [body.name], (error, rows) => {
+  // TODO: 以下のanyをなくす
+  database.query("select * from characters where name=?;", [body.name], (error, rows: any) => {
     if (error) {
       serverLogger(LOGGER_TYPE.ERROR, error);
       return res.status(500).json({
@@ -120,7 +123,8 @@ export const deleteCharacter = (req, res) => {
       code: "ERR_MISSING_BODY_DELETE"
     });
   }
-  database.query("select * from characters where name=?;", [body.name], (error, rows) => {
+  // TODO: 以下のanyをなくす
+  database.query("select * from characters where name=?;", [body.name], (error, rows: any) => {
     if (error) {
       serverLogger(LOGGER_TYPE.ERROR, error);
       return res.status(500).json({

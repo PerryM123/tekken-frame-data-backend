@@ -1,5 +1,5 @@
-import mysql from 'mysql2';
-import dotenv from 'dotenv';
+import mysql from 'mysql2'
+import dotenv from 'dotenv'
 dotenv.config()
 
 let connection = mysql.createConnection({
@@ -7,15 +7,15 @@ let connection = mysql.createConnection({
   database: process.env.MYSQL_DATABASE,
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
-  port: process.env.MYSQL_PORT
-});
+  port: Number(process.env.MYSQL_PORT)
+})
 
 connection.connect((error) => {
   if (error) {
-    throw error;
+    throw error
   } else {
-    console.log('database connected succesfully');
+    console.log('database connected succesfully')
   }
-});
+})
 
-export default connection;
+export default connection
