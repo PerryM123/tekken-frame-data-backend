@@ -1,26 +1,21 @@
 // library
 import express from 'express';
 import bodyParser from 'body-parser';
-// controllers
-import {
-  getCharacterList,
-  addCharacter,
-  deleteCharacter,
-  updateCharacterName,
-  getSpecificCharacter
-} from './controller/characterList.js';
+// routes
+import {router} from './routes'
 // middleware
 import { logger } from './middleware/logger.js';
+// datasource
+import { AppDataSource } from './datasource/index.js';
 
 const app = express();
 app.use(bodyParser.json());
 app.use(logger);
+app.use('/', router);
 const port = 8000;
-const apiPath = '/api/v1';
-// routes
-app.get(`${apiPath}/characters`, getCharacterList);
-app.get(`${apiPath}/characters/:name`, getSpecificCharacter);
-app.post(`${apiPath}/characters`, addCharacter);
-app.delete(`${apiPath}/characters`, deleteCharacter);
-app.put(`${apiPath}/characters/:name`, updateCharacterName);
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+AppDataSource.initialize().then(async () => {
+  console.log('[info] Connected to database successfully')
+}).catch(error => console.log(error))
+
+
+app.listen(port, () => console.log(`[info] App is listening on port ${port}!`));

@@ -15,8 +15,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "exactOptionalPropertyTypes": false
-
+    "exactOptionalPropertyTypes": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "ts-node": {
     "esm": true,
