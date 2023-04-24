@@ -1,10 +1,15 @@
 import { AppDataSource } from "../datasource";
 import { Users } from "../entity/Users";
+import crypto from 'crypto'
 
 const LOGGER_TYPE = {
   ERROR: 'error',
   WARNING: 'warn',
   INFO: 'info'
+}
+
+function convertToMd5(password) {
+  return crypto.createHash('md5').update(password).digest('hex');
 }
 
 // TODO: 定数化する必要ある
@@ -30,8 +35,6 @@ export const authenticateUser = async(req, res) => {
   }
   const userName: string = req.body.userName;
   const password: string = req.body.password;
-  console.log('userName: ', userName);
-  console.log('password: ', password);
 
   const usersRepository = AppDataSource.getRepository(Users);
   const userData = await usersRepository.findOneBy({
@@ -44,8 +47,7 @@ export const authenticateUser = async(req, res) => {
       code: "ERR_NOT_FOUND"
     });
   }
-  console.log('userData: ', userData);
-  if (password === userData.password) {
+  if (convertToMd5(password) === userData.password) {
     res.status(200).json({
       isSuccess: true
     })
