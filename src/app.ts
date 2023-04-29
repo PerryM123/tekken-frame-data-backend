@@ -1,7 +1,7 @@
 // library
 import express from 'express';
 import bodyParser from 'body-parser';
-// TODO: yarn add --dev @types/cookie-parser
+import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 // routes
@@ -11,25 +11,27 @@ import { logger } from './middleware/logger.js';
 // datasource
 import { AppDataSource } from './datasource/index.js';
 
+dotenv.config();
+const TIME = {
+  THIRTY_MINUTES: 1000 * 60 * 30
+}
+
 const app = express();
 app.use(bodyParser.json());
 app.use(logger);
 app.use(cookieParser());
 // TODO: 適切なキーを設定
 app.use(session({
-  secret: 'My secret key',
+  secret: process.env.SECRET_SESSION_KEY,
   name: 'session',
   cookie: {
-    // TODO: 確認必須
     secure: false,
-    // TODO: 確認必須
-    // resave: false,
-    path: '/', // default
-    httpOnly: true, // default
-    // TODO: 確認必須
-    maxAge: 1000 * 10,
-    something: 5
-  }
+    path: '/',
+    httpOnly: true,
+    maxAge: TIME.THIRTY_MINUTES
+  },
+  resave: true,
+  saveUninitialized: true,
 }));
 app.use('/', router);
 const port = 8000;

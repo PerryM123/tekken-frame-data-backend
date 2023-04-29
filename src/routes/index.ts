@@ -15,14 +15,10 @@ const apiPath = '/api/v1';
 export const router = express.Router();
 // Characterルート
 router.get(
-  `${apiPath}/characters`,
-  checkLoginStatus,
-  getCharacterList
+  `${apiPath}/characters`, getCharacterList
 );
 router.get(
-  `${apiPath}/characters/:name`,
-  checkLoginStatus,
-  getSpecificCharacter
+  `${apiPath}/characters/:name`, getSpecificCharacter
 );
 router.post(
   `${apiPath}/characters`,
