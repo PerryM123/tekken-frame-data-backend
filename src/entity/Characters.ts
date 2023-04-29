@@ -1,21 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class Characters {
-
-  constructor() { 
+  constructor() {
     this.id = 0;
-    this.name = "";
+    this.name = '';
     this.is_completed = false;
   }
 
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  is_completed: boolean
-
+  is_completed: boolean;
 }
