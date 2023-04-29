@@ -106,3 +106,5 @@ sw.*
 .prettierignore
 
 yarn.lock
+
+.gitignore
