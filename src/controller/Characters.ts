@@ -2,16 +2,12 @@
 // TODO: どういう時に500エラーを使えば良いか検討必須
 import { AppDataSource } from '../datasource';
 import { Characters } from '../entity/Characters';
+import { serverLogger } from '../utils/serverLogger';
 
 const LOGGER_TYPE = {
   ERROR: 'error',
   WARNING: 'warn',
   INFO: 'info'
-};
-
-// TODO: 定数化する必要ある
-const serverLogger = (type, message) => {
-  console.log(`[${type}] `, message);
 };
 
 export const getCharacterList = async (req, res) => {

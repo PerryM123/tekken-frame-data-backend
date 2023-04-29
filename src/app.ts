@@ -20,7 +20,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(logger);
 app.use(cookieParser());
-// TODO: 適切なキーを設定
 app.use(
   session({
     secret: process.env.SECRET_SESSION_KEY,

@@ -1,6 +1,7 @@
 import { AppDataSource } from '../datasource';
 import { Users } from '../entity/Users';
 import crypto from 'crypto';
+import { serverLogger } from '../utils/serverLogger';
 
 const LOGGER_TYPE = {
   ERROR: 'error',
@@ -11,11 +12,6 @@ const LOGGER_TYPE = {
 function convertToMd5(password) {
   return crypto.createHash('md5').update(password).digest('hex');
 }
-
-// TODO: 定数化する必要ある
-const serverLogger = (type, message) => {
-  console.log(`[${type}] `, message);
-};
 
 export const authenticateUser = async (req, res) => {
   const body = req.body;

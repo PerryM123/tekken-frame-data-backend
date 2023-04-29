@@ -1,5 +1,4 @@
 import express from 'express';
-// TODO: lowercase is better???
 import {
   getCharacterList,
   getSpecificCharacter,
