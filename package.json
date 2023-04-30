@@ -1,6 +1,6 @@
 {
   "name": "express-server",
-  "version": "1.0.0",
+  "version": "0.2",
   "main": "./src/app.ts",
   "license": "MIT",
   "type": "module",
