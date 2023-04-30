@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh";
+
+yarn lint-staged;
+# TODO: jestができたら以下の１行のコメントを外す
+# yarn test
