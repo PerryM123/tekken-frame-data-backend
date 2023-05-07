@@ -8,6 +8,7 @@ import session from 'express-session';
 import { router } from './routes';
 // middleware
 import { logger } from './middleware/logger.js';
+import { checkApiKey } from './middleware/checkApiKey';
 // datasource
 import { AppDataSource } from './datasource/index.js';
 
@@ -19,6 +20,7 @@ const TIME = {
 const app = express();
 app.use(bodyParser.json());
 app.use(logger);
+app.use(checkApiKey);
 app.use(cookieParser());
 app.use(
   session({
