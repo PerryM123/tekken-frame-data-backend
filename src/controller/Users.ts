@@ -44,7 +44,6 @@ export const authenticateUser = async (req, res) => {
     });
   }
   if (convertToMd5(password) === userData.password) {
-    req.session.isAuthenticatedUser = true;
     res.status(200).json({
       isSuccess: true
     });
@@ -56,7 +55,6 @@ export const authenticateUser = async (req, res) => {
 };
 
 export const logOutUser = async (req, res) => {
-  req.session.destroy();
   res.status(200).json({
     isSuccess: true
   });
