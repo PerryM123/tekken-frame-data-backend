@@ -3,7 +3,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
 // routes
 import { router } from './routes';
 // middleware
@@ -22,20 +21,6 @@ app.use(bodyParser.json());
 app.use(logger);
 app.use(checkApiKey);
 app.use(cookieParser());
-app.use(
-  session({
-    secret: process.env.SECRET_SESSION_KEY,
-    name: 'session',
-    cookie: {
-      secure: false,
-      path: '/',
-      httpOnly: true,
-      maxAge: TIME.THIRTY_MINUTES
-    },
-    resave: true,
-    saveUninitialized: true
-  })
-);
 app.use('/', router);
 const port = 8000;
 AppDataSource.initialize()
