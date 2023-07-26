@@ -46,7 +46,8 @@ export const authenticateUser = async (req, res) => {
   if (convertToMd5(password) === userData.password) {
     req.session.isAuthenticatedUser = true;
     res.status(200).json({
-      isSuccess: true
+      isSuccess: true,
+      userId: userData.id
     });
   } else {
     res.status(401).json({
