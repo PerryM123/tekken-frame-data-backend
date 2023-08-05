@@ -7,8 +7,7 @@ import {
   updateCharacterDetails
 } from './../controller/Characters';
 import { authenticateUser, logOutUser, userInfo } from '../controller/Users';
-
-const apiPath = '/api/v1';
+import { apiPath } from '../utils/constants';
 
 export const router = express.Router();
 // Characterルート
