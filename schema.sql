@@ -17,6 +17,8 @@ CREATE TABLE users (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    role_id integer,
     PRIMARY KEY (id),
     UNIQUE KEY (id)
 );

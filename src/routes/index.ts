@@ -6,7 +6,7 @@ import {
   deleteCharacter,
   updateCharacterName
 } from './../controller/Characters';
-import { authenticateUser, logOutUser } from '../controller/Users';
+import { authenticateUser, logOutUser, userInfo } from '../controller/Users';
 
 const apiPath = '/api/v1';
 
@@ -20,3 +20,4 @@ router.put(`${apiPath}/characters/:name`, updateCharacterName);
 // Usersルート
 router.post(`${apiPath}/login`, authenticateUser);
 router.get(`${apiPath}/logout`, logOutUser);
+router.get(`${apiPath}/me/:id`, userInfo);
