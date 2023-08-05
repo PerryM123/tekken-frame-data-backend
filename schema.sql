@@ -6,6 +6,7 @@ CREATE TABLE characters (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name varchar(255),
     is_completed boolean,
+    description varchar(255),
     PRIMARY KEY (id)
 );
 
@@ -17,6 +18,8 @@ CREATE TABLE users (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    role_id integer,
     PRIMARY KEY (id),
     UNIQUE KEY (id)
 );

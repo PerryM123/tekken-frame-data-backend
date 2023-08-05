@@ -60,3 +60,24 @@ export const logOutUser = async (req, res) => {
     isSuccess: true
   });
 };
+
+export const userInfo = async (req, res) => {
+  const userId = Number(req.params.id);
+  const usersRepository = AppDataSource.getRepository(Users);
+  const userData = await usersRepository.findOneBy({
+    id: userId
+  });
+  if (!userData) {
+    serverLogger(LOGGER_TYPE.ERROR, 'userInfo: ユーザは存在されてない');
+    return res.status(404).json({
+      message: 'ユーザは存在されてない',
+      code: 'ERR_NOT_FOUND'
+    });
+  }
+  res.status(200).json({
+    userId: userData.id,
+    name: userData.name,
+    email: userData.email,
+    roleId: userData.role_id
+  });
+};

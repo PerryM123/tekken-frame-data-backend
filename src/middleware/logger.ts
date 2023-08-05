@@ -1,6 +1,8 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
+import { serverLogger } from '../utils/serverLogger';
+import { LOGGER_TYPE } from '../utils/constants';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -16,7 +18,8 @@ export const logger = (req, res, next) => {
   };
   res.on('finish', () => {
     const durationInMilliseconds = getDurationInMilliseconds(startTime);
-    console.log(
+    serverLogger(
+      LOGGER_TYPE.INFO,
       `[info][${timeStamp}] ${req.method} ${req.originalUrl} ${res.statusCode} - - ${
         req.ip
       } - ${durationInMilliseconds.toLocaleString()} ms`

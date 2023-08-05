@@ -6,11 +6,8 @@ import cookieParser from 'cookie-parser';
 // routes
 import { router } from './routes';
 // middleware
-import { logger } from './middleware/logger.js';
+import { logger } from './middleware/logger';
 import { checkApiKey } from './middleware/checkApiKey';
-// datasource
-import { AppDataSource } from './datasource/index.js';
-
 dotenv.config();
 const TIME = {
   THIRTY_MINUTES: 1000 * 60 * 30
@@ -23,10 +20,5 @@ app.use(checkApiKey);
 app.use(cookieParser());
 app.use('/', router);
 const port = 8000;
-AppDataSource.initialize()
-  .then(async () => {
-    console.log('[info] Connected to database successfully');
-  })
-  .catch((error) => console.log(error));
 
-app.listen(port, () => console.log(`[info] App is listening on port ${port}!`));
+export default app;

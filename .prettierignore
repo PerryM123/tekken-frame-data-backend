@@ -36,3 +36,4 @@ sw.*
 .prettierignore
 yarn.lock
 .gitignore
+schema.sql
