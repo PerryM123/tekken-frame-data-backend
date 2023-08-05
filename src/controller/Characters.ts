@@ -26,13 +26,6 @@ export const getCharacterList = async (req, res) => {
 
 export const getSpecificCharacter = async (req, res) => {
   const name = req.params.name;
-  if (!req.params || req.params.name === undefined) {
-    serverLogger(LOGGER_TYPE.WARNING, 'ERR_MISSING_GET_SPECIFIC_CHARACTER');
-    return res.status(400).json({
-      message: 'missing query (name)',
-      code: 'ERR_MISSING_GET_SPECIFIC_CHARACTER'
-    });
-  }
   const characterRepository = AppDataSource.getRepository(Characters);
   const characterData = await characterRepository.findOneBy({
     name
