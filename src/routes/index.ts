@@ -4,7 +4,7 @@ import {
   getSpecificCharacter,
   addCharacter,
   deleteCharacter,
-  updateCharacterName
+  updateCharacterDetails
 } from './../controller/Characters';
 import { authenticateUser, logOutUser, userInfo } from '../controller/Users';
 
@@ -16,7 +16,7 @@ router.get(`${apiPath}/characters`, getCharacterList);
 router.get(`${apiPath}/characters/:name`, getSpecificCharacter);
 router.post(`${apiPath}/characters`, addCharacter);
 router.delete(`${apiPath}/characters`, deleteCharacter);
-router.put(`${apiPath}/characters/:name`, updateCharacterName);
+router.put(`${apiPath}/characters/:name`, updateCharacterDetails);
 // Usersルート
 router.post(`${apiPath}/login`, authenticateUser);
 router.get(`${apiPath}/logout`, logOutUser);

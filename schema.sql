@@ -6,6 +6,7 @@ CREATE TABLE characters (
     id INTEGER NOT NULL AUTO_INCREMENT,
     name varchar(255),
     is_completed boolean,
+    description varchar(255),
     PRIMARY KEY (id)
 );
 
