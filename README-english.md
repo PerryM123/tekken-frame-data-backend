@@ -1,4 +1,4 @@
-# Tekken Frame Data Backend ver0.2.1
+# Tekken Frame Data Backend ver0.2.2
 
 ※ [日本語の README.md はここ！](README.md)👈
 以下
