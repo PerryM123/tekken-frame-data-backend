@@ -2,13 +2,8 @@
 // TODO: どういう時に500エラーを使えば良いか検討必須
 import { AppDataSource } from '../datasource';
 import { Characters } from '../entity/Characters';
+import { LOGGER_TYPE } from '../utils/constants';
 import { serverLogger } from '../utils/serverLogger';
-
-const LOGGER_TYPE = {
-  ERROR: 'error',
-  WARNING: 'warn',
-  INFO: 'info'
-};
 
 export const getCharacterList = async (req, res) => {
   const characterRepository = AppDataSource.getRepository(Characters);

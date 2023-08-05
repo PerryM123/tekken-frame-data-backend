@@ -44,3 +44,27 @@ export const getSpecificCharacter200 = {
   is_completed: false,
   description: 'Jin Kazama is a character from Tekken'
 };
+
+export const loginUser401 = {
+  id: 2,
+  name: 'john',
+  password: '2829fc16ad8ca5a79da932f910afad1c',
+  email: 'john@gmail.com',
+  role_id: 1
+};
+
+export const loginUser200 = {
+  id: 2,
+  name: 'john',
+  password: '2829fc16ad8ca5a79da932f910afad1c',
+  email: 'john@gmail.com',
+  role_id: 1
+};
+
+export const userMe200 = {
+  id: 1,
+  name: 'perry',
+  password: '202cb962ac59075b964b07152d234b70',
+  email: 'perry@gmail.com',
+  role_id: 0
+};

@@ -63,13 +63,6 @@ export const logOutUser = async (req, res) => {
 
 export const userInfo = async (req, res) => {
   const userId = Number(req.params.id);
-  if (!req.params || req.params.id === undefined) {
-    serverLogger(LOGGER_TYPE.WARNING, 'ERR_MISSING_GET_USER_ID');
-    return res.status(400).json({
-      message: 'missing query (id)',
-      code: 'ERR_MISSING_GET_USER_ID'
-    });
-  }
   const usersRepository = AppDataSource.getRepository(Users);
   const userData = await usersRepository.findOneBy({
     id: userId
