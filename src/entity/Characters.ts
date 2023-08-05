@@ -6,6 +6,7 @@ export class Characters {
     this.id = 0;
     this.name = '';
     this.is_completed = false;
+    this.description = '';
   }
 
   @PrimaryGeneratedColumn()
@@ -16,4 +17,7 @@ export class Characters {
 
   @Column()
   is_completed: boolean;
+
+  @Column()
+  description: string;
 }

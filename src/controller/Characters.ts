@@ -2,13 +2,8 @@
 // TODO: どういう時に500エラーを使えば良いか検討必須
 import { AppDataSource } from '../datasource';
 import { Characters } from '../entity/Characters';
+import { LOGGER_TYPE } from '../utils/constants';
 import { serverLogger } from '../utils/serverLogger';
-
-const LOGGER_TYPE = {
-  ERROR: 'error',
-  WARNING: 'warn',
-  INFO: 'info'
-};
 
 export const getCharacterList = async (req, res) => {
   const characterRepository = AppDataSource.getRepository(Characters);
@@ -17,7 +12,8 @@ export const getCharacterList = async (req, res) => {
     characterData.map((item) => {
       return {
         name: item.name,
-        is_completed: item.is_completed
+        is_completed: item.is_completed,
+        description: item.description
       };
     })
   );
@@ -25,13 +21,6 @@ export const getCharacterList = async (req, res) => {
 
 export const getSpecificCharacter = async (req, res) => {
   const name = req.params.name;
-  if (!req.params || req.params.name === undefined) {
-    serverLogger(LOGGER_TYPE.WARNING, 'ERR_MISSING_GET_SPECIFIC_CHARACTER');
-    return res.status(400).json({
-      message: 'missing query (name)',
-      code: 'ERR_MISSING_GET_SPECIFIC_CHARACTER'
-    });
-  }
   const characterRepository = AppDataSource.getRepository(Characters);
   const characterData = await characterRepository.findOneBy({
     name
@@ -50,6 +39,7 @@ export const getSpecificCharacter = async (req, res) => {
 
 export const addCharacter = async (req, res) => {
   const body = req.body;
+  // TODO: 重複コードになってるので修正必須
   if (!body || body.name === undefined) {
     serverLogger(LOGGER_TYPE.WARNING, 'パラメータが足りない');
     return res.status(400).json({
@@ -61,6 +51,13 @@ export const addCharacter = async (req, res) => {
     serverLogger(LOGGER_TYPE.WARNING, 'パラメータが足りない');
     return res.status(400).json({
       message: 'missing body (is_completed)',
+      code: 'ERR_MISSING_BODY_POST'
+    });
+  }
+  if (!body || body.description === undefined) {
+    serverLogger(LOGGER_TYPE.WARNING, 'パラメータが足りない');
+    return res.status(400).json({
+      message: 'missing body (description)',
       code: 'ERR_MISSING_BODY_POST'
     });
   }
@@ -79,6 +76,7 @@ export const addCharacter = async (req, res) => {
   const newCharacter = new Characters();
   newCharacter.name = body.name;
   newCharacter.is_completed = body.is_completed;
+  newCharacter.description = body.description;
   await AppDataSource.manager.save(newCharacter);
 
   return res.status(200).json({
@@ -115,13 +113,13 @@ export const deleteCharacter = async (req, res) => {
   });
 };
 
-export const updateCharacterName = async (req, res) => {
+export const updateCharacterDetails = async (req, res) => {
   const body = req.body;
   const name: string = req.params.name;
-  if (body.name === undefined) {
+  if (body.name === undefined && body.description && (body.isCompleted === undefined) === undefined) {
     serverLogger(LOGGER_TYPE.WARNING, 'パラメータ足りない');
     return res.status(400).json({
-      message: 'missing body (name)',
+      message: 'missing body',
       code: 'ERR_MISSING_BODY_PUT'
     });
   }
@@ -132,12 +130,16 @@ export const updateCharacterName = async (req, res) => {
       code: 'ERR_MISSING_PARAMS_PUT'
     });
   }
-  const newName: string = body.name;
+  const newName: string | undefined = body.name;
+  const newDescription: string | undefined = body.description;
+  const isAddCompleted: boolean = body.isCompleted !== undefined;
   const characterRepository = AppDataSource.getRepository(Characters);
   await characterRepository.update(
     { name },
     {
-      name: newName
+      ...(body.name && { name: newName }),
+      ...(body.description && { description: newDescription }),
+      ...(isAddCompleted && { is_completed: body.isCompleted })
     }
   );
   return res.status(200).json({
