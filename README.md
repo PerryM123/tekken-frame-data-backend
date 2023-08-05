@@ -30,8 +30,10 @@ $ yarn dev
 # コンテナ起動
 $ cd ~/workspace/tekken-frame-data-backend
 $ docker-compose up -d
+
 # コンテナ確認
 $ docker container ls
+
 # node起動
 $ yarn dev
 ```
@@ -41,9 +43,11 @@ $ yarn dev
 ```
 # コンテナに接続
 $ docker exec -it tekken-frame-data-backend_mysqldb_1 bash
+
 # mysqlにログインし、パスワードへログイン（パスワードは.envを参考してください）
 @ bash-4.2
 $ mysql -u root -p mysql
+
 # schema.sqlを反映する
 mysql> create database tekken_frame_data;
     ->     use tekken_frame_data;
@@ -53,6 +57,18 @@ mysql> create database tekken_frame_data;
     ->     is_completed boolean,
     ->     PRIMARY KEY (id)
     -> );
+```
+
+## Redis
+```
+# redisコンテナに接続
+$ docker exec -it tekken-frame-data-backend_redis_1 bash
+
+# Redisコマンドラインインタフェースを実行
+$ redis-cli
+
+# redisに登録されているキーの一覧を取得する
+$ keys *
 ```
 
 ## Techonogies being used
