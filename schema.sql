@@ -10,9 +10,9 @@ CREATE TABLE characters (
     PRIMARY KEY (id)
 );
 
-INSERT INTO characters(name,is_completed) VALUES ("jin",false);
-INSERT INTO characters(name,is_completed) VALUES ("heihachi",true);
-INSERT INTO characters(name,is_completed) VALUES ("julia",true);
+INSERT INTO characters(name,is_completed,description) VALUES ("jin",false,"description1");
+INSERT INTO characters(name,is_completed,description) VALUES ("heihachi",true,"description2");
+INSERT INTO characters(name,is_completed,description) VALUES ("julia",true,"description3");
 
 CREATE TABLE users (
     id INTEGER NOT NULL AUTO_INCREMENT,
@@ -23,3 +23,7 @@ CREATE TABLE users (
     PRIMARY KEY (id),
     UNIQUE KEY (id)
 );
+
+INSERT INTO users(name,password,email,role_id) VALUES ("perry",MD5("123"),"perry@email.com",0);
+INSERT INTO users(name,password,email,role_id) VALUES ("john",MD5("doe"),"john@email.com",1);
+INSERT INTO users(name,password,email,role_id) VALUES ("peter",MD5("paker"),"peter@email.com",2);
