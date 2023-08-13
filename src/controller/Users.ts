@@ -2,6 +2,7 @@ import { AppDataSource } from '../datasource';
 import { Users } from '../entity/Users';
 import crypto from 'crypto';
 import { serverLogger } from '../utils/serverLogger';
+import { isString } from '../utils/typeCheck';
 
 const LOGGER_TYPE = {
   ERROR: 'error',
@@ -15,14 +16,14 @@ function convertToMd5(password) {
 
 export const authenticateUser = async (req, res) => {
   const body = req.body;
-  if (!body || body.userName === undefined) {
+  if (!body || body.userName === undefined || !isString(body.userName)) {
     serverLogger(LOGGER_TYPE.WARNING, 'パラメータが足りない');
     return res.status(400).json({
       message: 'missing body (name)',
       code: 'ERR_MISSING_BODY_POST'
     });
   }
-  if (!body || body.password === undefined) {
+  if (!body || body.password === undefined || !isString(body.password)) {
     serverLogger(LOGGER_TYPE.WARNING, 'パラメータが足りない');
     return res.status(400).json({
       message: 'missing body (is_completed)',
