@@ -47,6 +47,8 @@ $ docker exec -it tekken-frame-data-backend_mysqldb_1 bash
 # mysqlにログインし、パスワードへログイン（パスワードは.envを参考してください）
 @ bash-4.2
 $ mysql -u root -p mysql
+または
+$ mysql -h localhost -u root -p mysql
 
 # schema.sqlを反映する
 mysql> create database tekken_frame_data;
