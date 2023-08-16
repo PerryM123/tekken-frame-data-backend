@@ -3,6 +3,7 @@
 import { AppDataSource } from '../datasource';
 import { Characters } from '../entity/Characters';
 import { LOGGER_TYPE } from '../utils/constants';
+import { isString, isBoolean } from '../utils/typeCheck';
 import { serverLogger } from '../utils/serverLogger';
 
 export const getCharacterList = async (req, res) => {
@@ -40,21 +41,21 @@ export const getSpecificCharacter = async (req, res) => {
 export const addCharacter = async (req, res) => {
   const body = req.body;
   // TODO: 重複コードになってるので修正必須
-  if (!body || body.name === undefined) {
+  if (!body || body.name === undefined || !isString(body.name)) {
     serverLogger(LOGGER_TYPE.WARNING, 'パラメータが足りない');
     return res.status(400).json({
       message: 'missing body (name)',
       code: 'ERR_MISSING_BODY_POST'
     });
   }
-  if (!body || body.is_completed === undefined) {
+  if (!body || body.is_completed === undefined || !isBoolean(body.is_completed)) {
     serverLogger(LOGGER_TYPE.WARNING, 'パラメータが足りない');
     return res.status(400).json({
       message: 'missing body (is_completed)',
       code: 'ERR_MISSING_BODY_POST'
     });
   }
-  if (!body || body.description === undefined) {
+  if (!body || body.description === undefined || !isString(body.name)) {
     serverLogger(LOGGER_TYPE.WARNING, 'パラメータが足りない');
     return res.status(400).json({
       message: 'missing body (description)',
@@ -86,7 +87,7 @@ export const addCharacter = async (req, res) => {
 
 export const deleteCharacter = async (req, res) => {
   const body = req.body;
-  if (!body || body.name === undefined) {
+  if (!body || body.name === undefined || !isString(body.name)) {
     serverLogger(LOGGER_TYPE.WARNING, 'deleteCharacter: パラメータが足りない');
     return res.status(400).json({
       message: 'missing body (name)',
@@ -116,7 +117,7 @@ export const deleteCharacter = async (req, res) => {
 export const updateCharacterDetails = async (req, res) => {
   const body = req.body;
   const name: string = req.params.name;
-  if (body.name === undefined && body.description && (body.isCompleted === undefined) === undefined) {
+  if (body.name === undefined && body.description === undefined && body.isCompleted === undefined) {
     serverLogger(LOGGER_TYPE.WARNING, 'パラメータ足りない');
     return res.status(400).json({
       message: 'missing body',
