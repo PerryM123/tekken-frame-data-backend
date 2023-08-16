@@ -23,6 +23,7 @@ typings/
 *.tgz
 .yarn-integrity
 .env
+.env.example
 .cache
 .serverless
 .idea
