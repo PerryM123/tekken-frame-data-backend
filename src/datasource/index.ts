@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { Characters } from '../entity/Characters';
 import { Users } from '../entity/Users';
+import { Moves } from '../entity/Moves';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -13,7 +14,7 @@ export const AppDataSource = new DataSource({
   database: process.env.MYSQL_DATABASE,
   // synchronize: true,
   // logging: false,
-  entities: [Characters, Users]
+  entities: [Characters, Users, Moves]
   // migrations: [],
   // subscribers: [],
 });
