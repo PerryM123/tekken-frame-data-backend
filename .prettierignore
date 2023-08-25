@@ -38,3 +38,4 @@ sw.*
 yarn.lock
 .gitignore
 schema.sql
+.nvmrc
