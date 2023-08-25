@@ -50,15 +50,8 @@ $ mysql -u root -p mysql
 または
 $ mysql -h localhost -u root -p mysql
 
-# schema.sqlを反映する
-mysql> create database tekken_frame_data;
-    ->     use tekken_frame_data;
-    ->     CREATE TABLE characters (
-    ->     id INTEGER NOT NULL AUTO_INCREMENT,
-    ->     name varchar(255),
-    ->     is_completed boolean,
-    ->     PRIMARY KEY (id)
-    -> );
+# テーブルデータを反映する（/schema.sqlファイルを参考してください）
+mysql> 
 ```
 
 ## Redis
