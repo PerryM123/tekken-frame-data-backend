@@ -7,6 +7,12 @@ import {
   updateCharacterDetails
 } from './../controller/Characters';
 import { authenticateUser, logOutUser, userInfo } from '../controller/Users';
+import {
+  getCharacterMoves,
+  addCharacterMoves,
+  removeCharacterMoves,
+  removeAllMovesForCharacter
+} from '../controller/Moves';
 import { apiPath } from '../utils/constants';
 
 export const router = express.Router();
@@ -20,3 +26,8 @@ router.put(`${apiPath}/characters/:name`, updateCharacterDetails);
 router.post(`${apiPath}/login`, authenticateUser);
 router.get(`${apiPath}/logout`, logOutUser);
 router.get(`${apiPath}/me/:id`, userInfo);
+// Movesルート
+router.get(`${apiPath}/moves/:character_id`, getCharacterMoves);
+router.post(`${apiPath}/moves/:character_id`, addCharacterMoves);
+router.delete(`${apiPath}/moves`, removeCharacterMoves);
+router.delete(`${apiPath}/moves/all`, removeAllMovesForCharacter);
