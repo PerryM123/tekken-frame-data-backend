@@ -12,6 +12,7 @@ export const getCharacterList = async (req, res) => {
   res.status(200).json(
     characterData.map((item) => {
       return {
+        id: item.id,
         name: item.name,
         is_completed: item.is_completed,
         description: item.description
