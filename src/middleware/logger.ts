@@ -20,7 +20,7 @@ export const logger = (req, res, next) => {
     const durationInMilliseconds = getDurationInMilliseconds(startTime);
     serverLogger(
       LOGGER_TYPE.INFO,
-      `[info][${timeStamp}] ${req.method} ${req.originalUrl} ${res.statusCode} - - ${
+      `[${timeStamp}] ${req.method} ${req.originalUrl} ${res.statusCode} - - ${
         req.ip
       } - ${durationInMilliseconds.toLocaleString()} ms`
     );
